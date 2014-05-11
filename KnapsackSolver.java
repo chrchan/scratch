@@ -3,11 +3,16 @@ import java.io.ByteArrayInputStream;
 import java.io.InputStreamReader;
 import java.util.HashMap;
 
+/**
+ * Quick and dirty recursive algorithm to solve the 0-1 Knapsack Problem with and without memoization.
+ * Without memoization, it is a O(2^n) complexity solution.
+ * @see http://en.wikipedia.org/wiki/Knapsack_problem
+ */
 public class KnapsackSolver {
 
 	public static final boolean DEBUG = true;
 	
-	public static final boolean ENABLE_MEMOIZE = true;
+	public static final boolean ENABLE_MEMOIZE = false;
 	
 	// the format is <numItems>\n<capacity>\n<item1Weight> <item1Value>\n<item2Weight> <item2Value>\netc...
 	public static String SAMPLE_DATA = "6\n" +
