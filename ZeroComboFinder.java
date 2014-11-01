@@ -17,13 +17,23 @@ public class ZeroComboFinder {
                 int sum = ar[i] + ar[lowInd] + ar[highInd];
                 if (sum == 0) {
                     System.out.println(String.format("%d %d %d", ar[i], ar[lowInd], ar[highInd]));
-                    
-
+                    // check for repeats
+                    if (ar[lowInd] == ar[lowInd+1] && ar[highInd] == ar[highInd-1]) {
+                        System.out.println(String.format("%d %d %d", ar[i], ar[lowInd], ar[highInd]));
+                        System.out.println(String.format("%d %d %d", ar[i], ar[lowInd], ar[highInd]));
+                    } else if (ar[lowInd] == ar[lowInd+1]) {
+                        System.out.println(String.format("%d %d %d", ar[i], ar[lowInd], ar[highInd]));
+                    } else if (ar[highInd] == ar[highInd-1]) {
+                        System.out.println(String.format("%d %d %d", ar[i], ar[lowInd], ar[highInd]));
+                    }
+                    // continue search
+                    lowInd++;
+                    highInd--;
                 } else if (sum < 0) {
                     lowInd++;
-		} else {
+                } else {
                     highInd--;
-		}
+                }
             }
         }
     }
