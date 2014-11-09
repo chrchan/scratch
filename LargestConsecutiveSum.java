@@ -30,5 +30,7 @@ public class LargestConsecutiveSum {
         System.out.println(largestSum(new int[]{1, 1, 1, 1, -1, 5, 1}));
         System.out.println(largestSum(new int[]{1, 1, 1, 1, -1, 3, 0}));
         System.out.println(largestSum(new int[]{1, 1, 1, 1, -3, 5}));
+        System.out.println(largestSum(new int[]{5, 5, 5, 5, -10, 2}));
+        System.out.println(largestSum(new int[]{5, 5, 5, 5, -10, 2, 20}));
     }
 }
