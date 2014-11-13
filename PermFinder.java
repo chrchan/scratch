@@ -7,32 +7,40 @@ public class PermFinder {
     public PermFinder() {
     }
 
-    public LinkedList<Integer> findPerm(LinkedList<Integer> numbers, int order) throws Exception {
-	return findPermHelper(new LinkedList<Integer>(), numbers, order);
+    public int[] findPerm(int[] numbers, int order) throws Exception {
+	// make copy of input array as a LinkedList
+	LinkedList<Integer> numberList = new LinkedList<Integer>();
+	for(int i=0; i<numbers.length; i++) {
+	    numberList.add(numbers[i]);
+	}
+	return findPermHelper(new int[numbers.length], numberList, order, 0);
     }
 
-    public LinkedList<Integer> findPermHelper(LinkedList<Integer> buildList, LinkedList<Integer> numbers, int order) throws Exception {
+    public int[] findPermHelper(int[] buildList, LinkedList<Integer> numbers, int order, int currentPosition) throws Exception {
 	// base case
-	if (numbers.size() == 0) {
+	if (currentPosition >= buildList.length) {
 	    return buildList;
 	}
-	int numSubPerms = this.factorial(numbers.size()-1);
-	int numPerms = numSubPerms * numbers.size();
+	int numSubPerms = this.factorial(numbers.size() - 1);
+	int numPerms = numSubPerms * (numbers.size());
 	if (order > numPerms) throw new Exception(String.format("order=%d, numPerms=%d", order, numPerms));
 	int position = order / numSubPerms;
 	int newOrder = order % numSubPerms;
-	buildList.add(numbers.get(position));
+	buildList[currentPosition] = numbers.get(position);
 	numbers.remove(position);
-	return findPermHelper(buildList, numbers, newOrder);
+	return findPermHelper(buildList, numbers, newOrder, currentPosition + 1);
     }
 
     public static void main(String[] argv) {
 	PermFinder pf = new PermFinder();
 	try {
-	    LinkedList<Integer> numbers = new LinkedList<Integer>(Arrays.asList(1, 2, 3, 4));
-	    System.out.println(pf.findPerm(numbers, 6));
-	    numbers = new LinkedList<Integer>(Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9, 10));
-	    System.out.println(pf.findPerm(numbers, pf.factorial(numbers.size())-1));
+	    int[] numbers = new int[]{1, 2, 3, 4};
+	    System.out.println(Arrays.toString(pf.findPerm(numbers, 6)));
+	    for(int i=0; i<pf.factorial(numbers.length); i++) {
+		System.out.println(Arrays.toString(pf.findPerm(numbers, i)));
+	    }
+	    numbers = new int[]{1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+	    System.out.println(Arrays.toString(pf.findPerm(numbers, pf.factorial(numbers.length) - 1)));
 	} catch (Exception e) {
 	    e.printStackTrace();
 	}
